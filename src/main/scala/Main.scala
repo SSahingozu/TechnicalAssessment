@@ -68,22 +68,28 @@ object Main extends App {
     while (shopping) {
       println("Please input your items in the command line first input should be PriceBasket")
       val shoppingItems = scala.io.StdIn.readLine().toLowerCase()
-      val shoppingList = shoppingItems.split(" ").toList
-      val subtotal = calculateSubtotal(shoppingList)
-      val applesDiscount = (calculateApplesDiscount(shoppingList).toString.toDouble)
-      val breadDiscount = (calculateBreadDiscount(shoppingList).toString.toDouble)
-      val finalPrice = subtotal - applesDiscount - breadDiscount
+      if (shoppingItems.isEmpty) {
+        println("Please input your items in the command line first input should be PriceBasket")
+        val shoppingItems = scala.io.StdIn.readLine().toLowerCase()
+      }
+      else {
+        val shoppingList = shoppingItems.split(" ").toList
+        val subtotal = calculateSubtotal(shoppingList)
+        val applesDiscount = (calculateApplesDiscount(shoppingList).toString.toDouble)
+        val breadDiscount = (calculateBreadDiscount(shoppingList).toString.toDouble)
+        val finalPrice = subtotal - applesDiscount - breadDiscount
 
-      println(s"Subtotal: £" + f"$subtotal%.2f")
+        println(s"Subtotal: £" + f"$subtotal%.2f")
 
-      if (applesDiscount == 0) println("No Apples Discount applied")
-      else println(s"Apples 10% discount applied: £" + f"$applesDiscount%.2f")
+        if (applesDiscount == 0) println("No Apples Discount applied")
+        else println(s"Apples 10% discount applied: £" + f"$applesDiscount%.2f")
 
-      if (breadDiscount == 0) println("No Bread Discount applied")
-      else println(s"50% off a loaf of bread due to buying 2 cans of soup: £" + f"$breadDiscount%.2f")
+        if (breadDiscount == 0) println("No Bread Discount applied")
+        else println(s"50% off a loaf of bread due to buying 2 cans of soup: £" + f"$breadDiscount%.2f")
 
-      println(s"Total Price: £" + f"$finalPrice%.2f")
-      shopping = false
+        println(s"Total Price: £" + f"$finalPrice%.2f")
+        shopping = false
+      }
     }
   }
 
